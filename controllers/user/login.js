@@ -1,7 +1,7 @@
-const { Data, Err } = require("../helpers/response");
-const { verifyPassword } = require("../helpers/auth");
-const { generateToken } = require("../helpers/jwt");
-const User = require("../models/User");
+const { Data, Err } = require("../../helpers/response");
+const { verifyPassword } = require("../../helpers/auth");
+const { generateToken } = require("../../helpers/jwt");
+const User = require("../../models/User");
 
 const ACCESS_TOKEN_SECRET =
   process.env.ACCESS_TOKEN_SECRET ||

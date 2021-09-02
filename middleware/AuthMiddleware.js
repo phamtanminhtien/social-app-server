@@ -7,6 +7,11 @@ const ACCESS_TOKEN_SECRET =
 
 const isAuth = async (req, res, next) => {
   const authHeader = req.headers["authorization"];
+
+  if (!authHeader) {
+    return res.json(Err("243", "access denied."));
+  }
+
   const token = authHeader.split(" ")[1];
   const type = authHeader.split(" ")[0];
 
@@ -19,7 +24,7 @@ const isAuth = async (req, res, next) => {
     if (!decoded) {
       return res.json(Err("203", "access denied."));
     } else {
-      res.user = decoded;
+      req.user = decoded;
       return next();
     }
   } catch (error) {
@@ -28,4 +33,4 @@ const isAuth = async (req, res, next) => {
   }
 };
 
-module.exports = { isAuth };
+module.exports = isAuth;

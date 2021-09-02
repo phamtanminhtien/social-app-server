@@ -1,7 +1,7 @@
-const { Data, Err } = require("../helpers/response");
-const { hash } = require("../helpers/auth");
-const {} = require("../helpers/jwt");
-const User = require("../models/User");
+const { Data, Err } = require("../../helpers/response");
+const { hash } = require("../../helpers/auth");
+const {} = require("../../helpers/jwt");
+const User = require("../../models/User");
 
 const register = async (req, res) => {
   try {
