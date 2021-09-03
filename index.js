@@ -7,7 +7,8 @@ const user = require("./routes/user");
 const post = require("./routes/post");
 const comment = require("./routes/comment");
 const friend = require("./routes/friend");
-
+const media = require("./routes/media");
+require("./utils/deleteMedia");
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use("/user", user);
 app.use("/post", post);
 app.use("/comment", comment);
 app.use("/friend", friend);
+app.use("/media", media);
 
 httpServer.listen(PORT, () => {
   console.log("run in 3000");

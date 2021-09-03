@@ -1,12 +1,27 @@
 const { Err, Data } = require("../../helpers/response");
 const Post = require("../../models/Post");
+const mongoose = require("mongoose");
+const Media = require("../../models/Media");
 
 const post = async (req, res) => {
   try {
-    const { content } = req.body;
+    const { content, media } = req.body;
+    const _media = [];
     if (!content) return res.json(Err("442"), "content is empty");
+    if (Array.isArray(_media)) {
+      for (item in media) {
+        if (!mongoose.Types.ObjectId.isValid(media[item])) continue;
+        const temp = await Media.exists({ _id: media[item] });
+        if (!temp) continue;
+        _media.push(media[item]);
+      }
+    }
 
-    const post = new Post({ userId: req.user.userData._id, content: content });
+    const post = new Post({
+      userId: req.user.userData._id,
+      content: content,
+      media: _media,
+    });
     const result = await post.save();
 
     if (!result) return res.json(Err("442"), "you can not save this post");

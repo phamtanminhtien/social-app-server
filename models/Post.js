@@ -10,6 +10,10 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  media: {
+    type: [mongoose.Types.ObjectId],
+    ref: "Media",
+  },
   like: {
     type: Number,
     default: 0,

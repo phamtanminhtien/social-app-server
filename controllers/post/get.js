@@ -6,7 +6,9 @@ const get = async (req, res, id) => {
     if (!mongoose.Types.ObjectId.isValid(id))
       return res.json(Err("133", "id is not match the format"));
 
-    const post = await Post.findById(id).populate("userId", "username");
+    const post = await Post.findById(id)
+      .populate("userId", "username")
+      .populate("media");
 
     if (!post) return res.json(Err("133", "post is not available"));
 

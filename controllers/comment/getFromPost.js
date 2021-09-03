@@ -11,7 +11,7 @@ const getFromPost = async (req, res, postId) => {
       "userId",
       "username"
     );
-    console.log(comment);
+
     if (!comment) return res.json(Err("133", "comment is not available"));
 
     return res.json(Data(comment));
