@@ -16,7 +16,7 @@ const upload = async (req, res) => {
 
     res.json(Data(files));
   } catch (error) {
-    res.send(Err("022", "undefine"));
+    res.send(Err("032", "undefine"));
   }
 };
 

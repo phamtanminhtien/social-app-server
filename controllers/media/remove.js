@@ -16,7 +16,7 @@ const remove = async (req, res) => {
     return res.json(Data(""));
   } catch (error) {
     console.log(error);
-    res.send(Err("022", "undefine"));
+    res.send(Err("021", "undefine"));
   }
 };
 

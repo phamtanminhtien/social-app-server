@@ -13,7 +13,7 @@ const requestAddFriend = async (req, res) => {
     if (receiverId === req.user.userData._id)
       return res.json(Err("533", "you can not request to yourself"));
 
-    const user = await User.findById(receiverId, "username");
+    const user = await User.exists({ _id: receiverId });
     if (!user) return res.json(Err("433", "user is not available"));
 
     const doc = {
@@ -22,7 +22,7 @@ const requestAddFriend = async (req, res) => {
       status: { $in: [1, 2] },
     };
 
-    const queryRequest = await Friend.findOne(doc);
+    const queryRequest = await Friend.exists(doc);
     if (queryRequest) return res.json(Err("243", "you can not request again"));
 
     const request = new Friend({

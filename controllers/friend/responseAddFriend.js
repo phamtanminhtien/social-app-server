@@ -10,7 +10,7 @@ const responseAddFriend = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(requesterId))
       return res.json(Err("533", "id is not match the format"));
 
-    const user = await User.findById(requesterId);
+    const user = await User.exists({ _id: requesterId });
 
     if (!user)
       return res.json(Err("153", "the response user is not available"));
@@ -21,7 +21,7 @@ const responseAddFriend = async (req, res) => {
       status: 1,
     };
 
-    const request = await Friend.findOne(doc);
+    const request = await Friend.exists(doc);
 
     if (!request) return res.json(Err("234", "the request is not available"));
     let result;
