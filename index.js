@@ -8,11 +8,20 @@ const post = require("./routes/post");
 const comment = require("./routes/comment");
 const friend = require("./routes/friend");
 const media = require("./routes/media");
-require("./utils/deleteMedia");
+var cors = require("cors");
+
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
+//cors
+
+var corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 //mongoose connect
 mongoose
   .connect(process.env.STRING_CONNECT_DB, {})

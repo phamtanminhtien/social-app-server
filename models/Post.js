@@ -13,6 +13,7 @@ const postSchema = new mongoose.Schema({
   media: {
     type: [mongoose.Types.ObjectId],
     ref: "Media",
+    default: [],
   },
   like: {
     type: Number,
