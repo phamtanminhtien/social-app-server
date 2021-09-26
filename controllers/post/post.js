@@ -7,7 +7,8 @@ const post = async (req, res) => {
   try {
     const { content, media } = req.body;
     const _media = [];
-    if (!content) return res.json(Err("442"), "content is empty");
+    if (!content && media?.length == 0)
+      return res.json(Err("442", "must have at least media or content"));
     if (Array.isArray(_media)) {
       for (item in media) {
         if (!mongoose.Types.ObjectId.isValid(media[item])) continue;

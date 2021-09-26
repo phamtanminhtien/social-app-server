@@ -5,8 +5,9 @@ const fs = require("fs");
 const deleteOne = (id) => {
   return new Promise(async (resolve, reject) => {
     try {
+      const check = await Media.exists({ _id: id });
+      if (!check) return reject(new Error("id is not available"));
       const media = await Media.findById(id);
-      if (!media) return reject(new Error("id is not available"));
       if (fs.existsSync(media.meta.path)) {
         fs.rmSync(media.meta.path);
         await Media.findByIdAndRemove(id);

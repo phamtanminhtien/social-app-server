@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 
 const getRelate = async (req, res) => {
   const id = req.user.userData._id;
+
   try {
     if (!mongoose.Types.ObjectId.isValid(id))
       return res.json(Err("133", "id is not match the format"));
@@ -23,6 +24,7 @@ const getRelate = async (req, res) => {
       },
       ["requesterId", "receiverId"]
     );
+
     const filteredList = friendAndFollow.map((item) => {
       if (item.receiverId._id.toString() === id) {
         return item.requesterId._id;

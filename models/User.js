@@ -5,6 +5,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  avatar: {
+    type: mongoose.Types.ObjectId,
+    ref: "Media",
+  },
   lastName: {
     type: String,
     require: true,

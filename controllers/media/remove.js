@@ -5,9 +5,13 @@ const deleteMedia = require("../../utils/deleteMedia");
 
 const remove = async (req, res) => {
   try {
-    const { data: filesId } = req.body;
+    let { data: filesId } = req.body;
+    if (!filesId) return res.json(Err("231", "empty not allow"));
+    if (!Array.isArray(filesId)) {
+      filesId = [filesId];
+    }
     if (
-      !filesId.every((fileId) => {
+      filesId.every((fileId) => {
         return mongoose.Types.ObjectId.isValid(fileId);
       })
     )

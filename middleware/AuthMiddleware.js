@@ -16,13 +16,13 @@ const isAuth = async (req, res, next) => {
   const type = authHeader.split(" ")[0];
 
   if (!type || type !== "Bearer") {
-    return res.json(Err("203", "access denied."));
+    return res.json(Err("253", "access denied."));
   }
 
   try {
     const decoded = await verifyToken(token, ACCESS_TOKEN_SECRET);
     if (!decoded) {
-      return res.json(Err("203", "access denied."));
+      return res.json(Err("223", "access denied."));
     } else {
       req.user = decoded;
       return next();

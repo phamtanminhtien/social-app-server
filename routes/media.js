@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 });
 const multerUpload = multer({ storage: storage });
 
-router.post("/", isAuth, multerUpload.array("photos", 5), upload);
+router.post("/", isAuth, multerUpload.array("photos", 20), upload);
 router.delete("/remove", isAuth, remove);
 
 module.exports = router;
