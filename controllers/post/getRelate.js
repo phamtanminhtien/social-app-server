@@ -33,10 +33,25 @@ const getRelate = async (req, res) => {
       }
     });
 
-    const posts = await Post.find({ userId: { $in: filteredList } }).sort({
-      createdAt: -1,
-    });
+    filteredList.push(mongoose.Types.ObjectId(id));
 
+    const posts = await Post.find({
+      userId: { $in: filteredList },
+    })
+      .sort({
+        createdAt: -1,
+      })
+      .populate({
+        path: "media",
+        limit: 4,
+      })
+      .populate({
+        path: "userId",
+        select: ["username", "firstName", "lastName"],
+        populate: {
+          path: "avatar",
+        },
+      });
     return res.json(Data(posts));
   } catch (error) {
     console.log(error);

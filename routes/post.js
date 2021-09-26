@@ -2,6 +2,7 @@ const router = require("express").Router();
 const get = require("../controllers/post/get");
 const getFromUser = require("../controllers/post/getFromUser");
 const getRelate = require("../controllers/post/getRelate");
+const like = require("../controllers/post/like");
 const post = require("../controllers/post/post");
 const isAuth = require("../middleware/AuthMiddleware");
 
@@ -20,6 +21,8 @@ router.get("/user/:id", async (req, res) => {
 router.get("/user/", async (req, res) => {
   return await getFromUser(req, res, req.query.id);
 });
+
+router.post("/like", isAuth, like);
 
 router.post("/", isAuth, post);
 

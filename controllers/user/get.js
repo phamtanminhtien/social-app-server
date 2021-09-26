@@ -7,7 +7,11 @@ const get = async (req, res, id) => {
     if (!mongoose.Types.ObjectId.isValid(id))
       return res.json(Err("133", "id is not match the format"));
 
-    const user = await User.findById(id, "username");
+    const user = await User.findById(id, [
+      "username",
+      "firstName",
+      "lastName",
+    ]).populate("avatar");
 
     if (!user) return res.json(Err("133", "user is not available"));
 

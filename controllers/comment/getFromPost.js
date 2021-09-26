@@ -7,10 +7,17 @@ const getFromPost = async (req, res, postId) => {
     if (!mongoose.Types.ObjectId.isValid(postId))
       return res.json(Err("133", "id is not match the format"));
 
-    const comment = await Comment.find({ postId }).populate(
-      "userId",
-      "username"
-    );
+    const comment = await Comment.find({ postId })
+      .sort({
+        createdAt: -1,
+      })
+      .populate({
+        path: "userId",
+        select: ["firstName", "lastName"],
+        populate: {
+          path: "avatar",
+        },
+      });
 
     if (!comment) return res.json(Err("133", "comment is not available"));
 

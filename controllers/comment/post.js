@@ -5,8 +5,9 @@ const Post = require("../../models/Post");
 
 const post = async (req, res) => {
   try {
-    const { content } = req.body;
+    const { content, postId } = req.body;
     if (!content) return res.json(Err("442", "content is empty"));
+    if (!postId) return res.json(Err("443", "postId is empty"));
 
     const comment = new Comment({
       userId: req.user.userData._id,

@@ -22,6 +22,11 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+//static file
+
+app.use("/media", express.static("upload/photo"));
+
 //mongoose connect
 mongoose
   .connect(process.env.STRING_CONNECT_DB, {})

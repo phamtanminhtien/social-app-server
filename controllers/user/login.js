@@ -28,9 +28,14 @@ const login = async (req, res) => {
       ACCESS_TOKEN_SECRET,
       ACCESS_TOKEN_LIFE
     );
+    const getInfo = await User.findById(user._id, [
+      "firstName",
+      "lastName",
+    ]).populate("avatar");
     return res.json(
       Data({
         token: _token,
+        user: getInfo,
       })
     );
   } catch (error) {

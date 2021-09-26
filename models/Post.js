@@ -15,8 +15,9 @@ const postSchema = new mongoose.Schema({
     default: [],
   },
   like: {
-    type: Number,
-    default: 0,
+    type: [mongoose.Types.ObjectId],
+    ref: "User",
+    default: [],
   },
   createdAt: {
     type: Date,
