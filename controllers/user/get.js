@@ -11,6 +11,7 @@ const get = async (req, res, id) => {
       "username",
       "firstName",
       "lastName",
+      "avatar",
     ]).populate("avatar");
 
     if (!user) return res.json(Err("133", "user is not available"));

@@ -11,7 +11,21 @@ const getFromUser = async (req, res, userId) => {
     const user = await User.exists({ _id: userId });
     if (!user) return res.json(Err("533", "user is not available"));
 
-    const post = await Post.find({ userId }).populate("userId", "username");
+    const post = await Post.find({ userId })
+      .sort({
+        createdAt: -1,
+      })
+      .populate({
+        path: "media",
+        limit: 4,
+      })
+      .populate({
+        path: "userId",
+        select: ["username", "firstName", "lastName"],
+        populate: {
+          path: "avatar",
+        },
+      });
 
     if (!post) return res.json(Err("133", "post is not available"));
 

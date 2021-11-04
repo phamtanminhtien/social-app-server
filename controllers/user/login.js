@@ -31,6 +31,8 @@ const login = async (req, res) => {
     const getInfo = await User.findById(user._id, [
       "firstName",
       "lastName",
+      "username",
+      "avatar",
     ]).populate("avatar");
     return res.json(
       Data({

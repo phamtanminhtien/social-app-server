@@ -4,8 +4,9 @@ const Post = require("../../models/Post");
 const like = async (req, res) => {
   try {
     const userId = req.user.userData._id;
-    const { postId } = req.body;
+    const { postId, status } = req.body;
     if (!postId) res.json(Err("847", "post id is required"));
+    if (!status) res.json(Err("247", "status id is required"));
 
     const check = await Post.findOne({
       _id: postId,
@@ -15,7 +16,7 @@ const like = async (req, res) => {
         },
       },
     });
-    if (check) {
+    if (status === "unlike") {
       const result = await Post.updateOne(
         { _id: postId },
         {
@@ -24,7 +25,7 @@ const like = async (req, res) => {
           },
         }
       );
-      return res.json(Data(0));
+      return res.json(Data("0"));
     } else {
       const result = await Post.updateOne(
         { _id: postId },
@@ -34,7 +35,8 @@ const like = async (req, res) => {
           },
         }
       );
-      return res.json(Data(1));
+
+      return res.json(Data("1"));
     }
   } catch (error) {
     console.log(error);
