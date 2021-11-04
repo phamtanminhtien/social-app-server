@@ -41,6 +41,7 @@ const login = async (req, res) => {
       })
     );
   } catch (error) {
+    console.log(error);
     res.send(Err("002", "undefine"));
   }
 };
