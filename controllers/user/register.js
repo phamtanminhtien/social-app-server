@@ -20,9 +20,7 @@ const register = async (req, res) => {
         password: hash(password),
       });
       await user.save();
-      res.json(
-        Data()
-      );
+      res.json(Data());
     } else {
       res.json(Err("902", "username already exists"));
     }
